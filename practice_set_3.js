@@ -48,7 +48,7 @@ const findPerson = (objArr, name) => {
   return null;
 }
 
-// const findPerson = (objArr ,name) => objArr.map((elem) => elem.name===name ? elem : null)
+// const findPerson = (objArr, name) => objArr.map((elem) => elem.name === name ? elem : null)
 
 // console.log(findPerson([{ name: 'Amay', age: 25 }, { name: 'Akhil', age: 25 },], "Akhil"))
 
@@ -88,7 +88,7 @@ const startsWithA = str => str.charAt(0) === 'A'
 
 // 6️⃣ Write an ES6 function to return only the first character of the given array.
 
-const printFirstCharacter = (arr) => arr[0]
+const printFirstCharacter = arr => arr[0]
 // console.log(printFirstCharacter([1, 2, 3, 5, 8]))
 // 1
 
@@ -99,12 +99,20 @@ const printFirstCharacter = (arr) => arr[0]
 const printLastFive = arr => {
   const ar = []
   for (let i = arr.length - 1; i >= arr.length - 5; i--) {
-    //6                 7-5 = 2  
     ar.push(arr[i]);
     // console.log(arr[i])
   }
   return ar.reverse();
 }
+
+// slice(start,end-1)
+/*
+// const printLastFive1=(arr)=> {
+//   let s= arr.slice(-5);
+//   console.log(s)
+// }
+// console.log(printLastFive1([0, 1, 1, 2, 3, 5, 8]));
+*/
 
 // const printFive = arr => arr.map((elem, i) => i > 1 ? elem : null)
 
@@ -133,17 +141,18 @@ const sayHello = arr => `Hello ${arr[1]}`;
 
 // 🔟 Write an ES6 function to return sum of all numbers at even indices of the given array.
 
-
 const sumOfEvenIndices = arr => {
   let sum = 0;
-  arr.map((elem) => {
-    elem % 2 === 0 ? sum += elem : sum;
-  })
+  for (let i = 0; i < arr.length; i++) {
+    if (i % 2 === 0) {
+      sum += arr[i];
+    }
+  }
   return sum;
 }
 
 // console.log(sumOfEvenIndices([2, 4, 3, 7, 1, 5])) // 6
-// console.log(sumOfEvenIndices([12, 14, 3, 27, 15, 25])) // 26
+// console.log(sumOfEvenIndices([12, 14, 3, 27, 15, 25])) // 30
 
 
 // 1️⃣1️⃣ Write an ES6 function to return the sum of only first 2 elements of the array .
