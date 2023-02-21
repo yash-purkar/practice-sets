@@ -40,12 +40,16 @@ const message2 = formatProduct(product2)
 // 3️⃣ Write a function findPerson that takes an array of person objects and a name as parameters and returns the object with the matching name, or null if not found.
 
 const findPerson = (objArr, name) => {
+  const arr = [];
   for (let i = 0; i < objArr.length; i++) {
     if (objArr[i].name === name) {
-      return objArr[i];
+      arr.push(objArr[i])
+    }
+    else {
+      arr.push(null)
     }
   }
-  return null;
+  return arr;
 }
 
 // const findPerson = (objArr, name) => objArr.map((elem) => elem.name === name ? elem : null)
