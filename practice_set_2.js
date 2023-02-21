@@ -15,7 +15,7 @@ person.age = 35;
 const car1 = { make: 'Porsche', model: '911', horsepower: 450 };
 const car2 = { make: 'Toyota', model: 'Camry', horsepower: 200 };
 
-const isSportsCar = ({ horsepower }) => horsepower >= 300
+const isSportsCar = ({ horsepower }) => horsepower >= 300;
 
 // console.log(isSportsCar(car1)); // true
 // console.log(isSportsCar(car2)); // false
@@ -28,7 +28,7 @@ const person1 = {
   age: 20
 }
 
-// const isEligible = ({ age }, num) => age + num >= 21;
+const isEligible = ({ age }, num) => age + num >= 21;
 // console.log(isEligible(person1, 1)); //true
 // console.log(isEligible(person1, 2)); //true
 
@@ -47,9 +47,8 @@ const getViews = ({ views }) => views > 1000;
 // 5️⃣ Swap the values of two variables using array destructing
 let a = 1;
 let b = 2;
-const arr = [a, b];
-// console.log(arr);
-[b, a] = arr;
+
+[b, a] = [a, b];
 
 
 // console.log(a) // 2
@@ -72,6 +71,7 @@ const obj1 = { a: 1, b: 2 };
 const obj2 = { c: 3, d: 4 };
 
 const combineObj = combineObjects(obj1, obj2);
+//const combineObjects=(obj1,obj2)=>Object.assign(obj1,obj2)
 
 // console.log(combineObj); //{ a: 1, b: 2, c: 3, d: 4 }
 

@@ -37,14 +37,12 @@ const isEvenOrOdd = num => num % 2 == 0 ? `Even Number` : `Odd Number`;
 // 5️⃣ Write a function that takes a string as input and determines if it contains the letter 'a' or ‘A’.
 // 1st Way
 
-const checkForAlphabetA = str => str.toLowerCase().includes(`a`) ? `Includes a` : `Does not include a`
+const checkForAlphabetA = str => str.toLowerCase().includes(`a`) ? `Includes a` : `Does not include a`;
 
 // 2nd Way
 /*const checkForAlphabetA = str => {
-  // console.log(str.split(``));
-  const newStrArr = str.split(``);
-  for (let i = 0; i < newStrArr.length; i++) {
-    if (newStrArr[i].toLowerCase() === `a`) {
+  for (let i = 0; i < str.length; i++) {
+    if (str[i].toLowerCase() === `a`) {
       return `Includes a`;
     }
   }
