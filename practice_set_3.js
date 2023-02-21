@@ -48,7 +48,9 @@ const findPerson = (objArr, name) => {
   return null;
 }
 
-console.log(findPerson([{ name: 'Amay', age: 25 }, { name: 'Akhil', age: 25 },], "Akhil"))
+// const findPerson = (objArr ,name) => objArr.map((elem) => elem.name===name ? elem : null)
+
+// console.log(findPerson([{ name: 'Amay', age: 25 }, { name: 'Akhil', age: 25 },], "Akhil"))
 
 // console.log(findPerson([{ name: 'Amay', age: 25 }, { name: 'Akhil', age: 25 }], "Akhil"))
 // [ null, { name: 'Akhil', age: 25 } ]
