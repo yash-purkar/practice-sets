@@ -38,19 +38,16 @@ const message2 = formatProduct(product2)
 
 
 // 3️⃣ Write a function findPerson that takes an array of person objects and a name as parameters and returns the object with the matching name, or null if not found.
-
 const findPerson = (objArr, name) => {
-  const arr = [];
   for (let i = 0; i < objArr.length; i++) {
     if (objArr[i].name === name) {
-      arr.push(objArr[i])
-    }
-    else {
-      arr.push(null)
+      return objArr[i];
     }
   }
-  return arr;
+  return null;
 }
+
+// console.log(findPerson([{ name: 'Amay', age: 25 }, { name: 'Akhil', age: 25 },], "Akhil"))
 
 // const findPerson = (objArr, name) => objArr.map((elem) => elem.name === name ? elem : null)
 
@@ -124,6 +121,21 @@ const printLastFive = arr => {
 // console.log(printFive([0, 1, 1, 2, 3, 5, 8]));
 // [1, 2, 3, 5, 8]
 
+
+
+
+/*const printLastFive = arr => {
+  const ar = []
+       //6                        2
+  for (let i = arr.length - 1; i >= arr.length - 5; i--) {
+    ar.unshift(arr[i]);
+    // [1,2,3,5,8]
+    // console.log(arr[i])
+  }
+return ar;
+}
+
+console.log(printLastFive([0, 1, 1, 2, 3, 5, 8]));*/
 
 // 8️⃣ Write an ES6 function to return the second element of the given array by multiplying 20 to it.
 
