@@ -161,13 +161,15 @@ const bollywoodMovies = [
 ];
 
 // Your code here
-const getBestOldBollywoodMovies = movies => {
-  const filteredMoviesArr = movies.filter(movie => movie.year < 1990 && movie.rating > 8.0);
+
+const getBestOldBollywoodMovies = movies => movies.filter(({ year, rating }) => year < 1990 && rating > 8).map(({ title }) => title);
+
+/*const getBestOldBollywoodMovies = movies => {
+  const filteredMoviesArr = movies.filter(movie => movie.year < 1990 && movie.rating > 8);
   // console.log(filteredMoviesArr);
   const titles = filteredMoviesArr.map(movie => movie.title);
   return titles;
-}
-
+}*/
 
 const bestOldMovies = getBestOldBollywoodMovies(bollywoodMovies);
 console.log(bestOldMovies); // Output: ['Sholay', 'Parinda']
