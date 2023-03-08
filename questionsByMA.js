@@ -150,7 +150,37 @@ const getDetails = ({ name, school: { board: [board], marks: [{ subject: sub1, p
 //   },
 // };
 
-
-// console.log(name,board,sub1,sub1M)
 // console.log(getDetails(obj3));
 // OUTPUT My name is Ankit Singhania. I scored 99 in Math and 96 in Computer from ISC board
+
+
+// ❓11  Write a function to calculate sum of n elements where n>=2
+
+const sumOfN = (...numbers) => numbers.reduce((acc, curr) => acc + curr, 0)
+// console.log(sumOfN(1, 2, 3)); // 6
+// console.log(sumOfN(1, 2, 3, 4)) // 10
+
+const sumOfN2 = (...numbers) => {
+  let sum = 0;
+  for (let num of numbers) sum += num;
+  return sum;
+}
+// console.log(sumOfN2(1, 2, 3, 4)) // 10
+
+
+// ❓12 write a function which will take an array of "n" numbers as an argument and will return the object containing maximum number, minimum number and avg of all numbers in array.
+
+const getOutput2 = numbers => {
+  let min = numbers[0];
+  let max = numbers[0];
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    if (min > numbers[i]) min = numbers[i];
+    if (max < numbers[i]) max = numbers[i];
+    sum += numbers[i];
+  }
+  return { max, min, avg: sum / numbers.length };
+}
+// console.log(getOutput2([1, 2, 3, 4, 5])); // output : {max: 5, min: 1, avg: 3}
+
+// note: do it without using any inbuilt function
