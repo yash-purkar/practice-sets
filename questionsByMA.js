@@ -184,3 +184,79 @@ const getOutput2 = numbers => {
 // console.log(getOutput2([1, 2, 3, 4, 5])); // output : {max: 5, min: 1, avg: 3}
 
 // note: do it without using any inbuilt function
+
+
+
+// ❓13 Given an array of numbers, write a function that returns the sum of all the even numbers.
+const numbers3 = [1, 2, 3, 4, 5, 6, 7, 8];
+const sumOfEven = numbers => numbers.reduce((acc, curr) => curr % 2 === 0 ? acc += curr : acc, 0);
+// console.log(sumOfEven(numbers3)); //20
+
+
+// ❓14 Given an array of numbers, write a function that returns the difference between the largest and smallest numbers.
+const numbers4 = [10, 2, 7, 14, 5];
+// OUTPUT 12
+
+//1
+const difference = numbers => {
+  const min = Math.min(...numbers); //Math.min(10,2,7,14,5) = 2
+  const max = Math.max(...numbers); //Math.max(10,2,7,14,5) = 14
+  return max - min
+}
+
+//2
+/*const difference = numbers => {
+  let min = numbers[0]
+  let max = numbers[0]
+  for (let i = 0; i < numbers4.length; i++) {
+    if (min > numbers4[i]) min = numbers4[i];
+    if (max < numbers4[i]) max = numbers4[i];
+  }
+  return max - min;
+}*/
+// console.log(difference(numbers4)); 
+
+//3
+/*const diff = numbers => numbers.reduce((acc, curr) => {
+  if (acc.min > curr) acc.min = curr;
+  if (acc.max < curr) acc.max = curr;
+  acc.dif = acc.max - acc.min;
+  return acc
+}, { min: numbers[0], max: numbers[0], dif: 0 });
+
+const getDifference = diff(numbers4);
+// console.log(getDifference);
+const { dif } = getDifference;
+// console.log(dif);*/
+// Note: you may use inbuilt function if you want
+
+
+// ❓15 Given an array of objects representing students, use the reduce function to find the student name with the highest grade.
+
+const students = [
+  { name: 'Alice', grade: 85 },
+  { name: 'Bob', grade: 70 },
+  { name: 'Charlie', grade: 90 },
+  { name: 'Dave', grade: 80 }
+];
+
+const findStudentName = students => students.reduce((acc, curr) => {
+  return acc.grade < curr.grade ? curr : acc;
+}, students[0]).name;
+const student = findStudentName(students);
+// console.log(student);
+// OUTPUT Charlie
+
+
+// ❓16 Given an array of strings, use the reduce function to find the total length of all the strings combined.
+
+const strings = ['hello', 'world', 'how', 'are', 'you'];
+const totalLength = strings => strings.reduce((total, curr) => total + curr.length, 0);
+
+/*const totalLength = strings => strings.reduce((acc, curr) => {
+  return acc += curr;
+}, "").length*/
+// console.log(totalLength(strings));
+// Output: 19
+
+
