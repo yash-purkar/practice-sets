@@ -330,6 +330,68 @@ const getFreq = strings => strings.reduce((acc, curr) => {
     }
   })
   return acc;
-}, {})
+}, {});
+
+/*const charFrequency = strings.reduce((acc, curr) => {
+  curr.split("").forEach((char) => {
+    acc[char] = (acc[char] ? acc[char] + 1 : 1);
+  });
+  return acc;
+}, {});*/
+
+/*const strings = ["apple", "banana", "cherry"];
+
+function countChars(strings) {
+  return strings
+    .map((str) => str.split(""))
+    .reduce((acc, chars) => {
+      chars.forEach((char) => {
+        acc[char] = (acc[char] || 0) + 1;
+      });
+      return acc;
+    }, {});
+}
+const counts = countChars(strings);
+console.log(counts);*/
 // console.log(getFreq(strings1));
 // Output: { a: 4, p: 2, l: 1, e: 2, b: 1, n: 2, c: 1, h: 1, r: 2, y: 1}
+
+
+
+
+const nums = [7, 11, 15, 2];
+const target = 9;
+const twoSum = nums => {
+  const indexes = [];
+  for (let i = 0; i < nums.length; i++) {
+    let currNum = nums[i]; //7
+    for (let j = i + 1; j < nums.length; j++) {
+      if (currNum + nums[j] === target) { //7+2
+        indexes[indexes.length] = i;
+        indexes[indexes.length] = j;
+        return indexes;
+      }
+    }
+  }
+}
+
+console.log(twoSum(nums));
+
+/*
+const arr = [2, 3, 5];
+const twoSum = (arr, goal) => {
+const comp = {};
+const len = arr.length;
+
+  for (let i = 0; i < len; i++) {
+    console.log(comp); //{ '4': 1, '5': 0 }
+    if (comp[arr[i]] >= 0) { //comp[5] //2
+      return [comp[arr[i]], i] //comp[5] 0,2
+    }
+    comp[goal - arr[i]] = i; //comp[5] = 0 //comp[4] =1
+  }
+  return [];
+};
+
+console.log(twoSum(arr, 7));
+*/
