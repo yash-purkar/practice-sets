@@ -88,9 +88,23 @@ const people1 = [
   { name: 'David', age: 40 }
 ];
 // Your code here
+// const getAvg= people => {
+//     let sum = 0;
+//     for(let i=0;i<people.length;i++){
+//         sum+=people[i].age;
+//     }
+//     return {averageAge : sum/people.length}
+// }
 
-const getAverageAge = people => people.reduce((acc, { age }) => acc + age, 0) / people.length;
+/*const getAvg = people => {
 
+  const sum = people.reduce((acc, curr) => {
+    return acc += curr.age;
+  }, 0)
+  return { averageAge: sum / people.length }
+};
+
+const getAverageAge=people=>({averageAge:people.reduce((acc,curr)=>acc+curr.age,0)/people.length})*/
 
 console.log(getAverageAge(people1));
 // Output: { averageAge: 32.5 }
@@ -114,12 +128,21 @@ console.log(findMostExpensiveProduct(products));
 // 🔟Write an ES6 function that takes an array of strings and returns an object with the count of each string.
 const fruits = ['apple', 'banana', 'banana', 'cherry', 'apple', 'apple', 'banana'];
 // Your code here
+//1
+const countStrings2 = strings => strings.reduce((acc, curr) => acc[curr] ? { ...acc, [curr]: acc[curr] += 1 } : { ...acc, [curr]: 1 }, {});
+
+//2
 const countStrings = strings => strings.reduce((acc, curr) => {
+  acc[curr] ? acc[curr] += 1 : acc[curr] = 1
+  return acc;
+}, {});
+
+//3
+const countStrings1 = strings => strings.reduce((acc, curr) => {
   if (acc[curr]) {
     acc[curr] += 1;
-  }
-  else {
-    acc[curr] = 1;
+  } else {
+    acc[curr] = 1
   }
   return acc;
 }, {});
