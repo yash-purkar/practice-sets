@@ -129,7 +129,7 @@ console.log(findMostExpensiveProduct(products));
 const fruits = ['apple', 'banana', 'banana', 'cherry', 'apple', 'apple', 'banana'];
 // Your code here
 //1
-const countStrings2 = strings => strings.reduce((acc, curr) => acc[curr] ? { ...acc, [curr]: acc[curr] += 1 } : { ...acc, [curr]: 1 }, {});
+const countStrings2 = strings => strings.reduce((acc, curr) => acc[curr] ? { ...acc, [curr]: acc[curr] + 1 } : { ...acc, [curr]: 1 }, {});
 
 //2
 const countStrings = strings => strings.reduce((acc, curr) => {

@@ -395,3 +395,33 @@ const len = arr.length;
 
 console.log(twoSum(arr, 7));
 */
+
+
+
+
+// // Given an array/list [] of integers , Construct a product array Of same size Such That prod[i] is equal to The Product of all the elements of Arr[] except Arr[i].
+// [1,2,3] ==> [6,3,2]
+const nums2 = [1, 2, 3]; //[6,3,2]
+const getProductArr = (nums) =>
+  nums.map((elem, i, arr) => {
+    return arr.reduce((acc, curr, index) => (i !== index ? acc * curr : acc), 1);
+  });
+console.log(getProductArr(nums));
+
+/*const getProductArr = (nums) => {
+  const arr = [];
+  let acc = 1;
+  for (let i = 0; i < nums.length; i++) { //0
+    acc = 1;
+    for (let j = 0; j < nums.length; j++) { //0 1 2
+      if (i !== j) { //0!=0 f | 1!=0 T | 2!=0 T
+        acc = acc * nums[j]; //1*2=2 | 2*3 =6
+      }
+    }
+    arr.push(acc); //6
+  }
+  return arr;
+};
+console.log(getProductArr(nums2));*/
+
+
