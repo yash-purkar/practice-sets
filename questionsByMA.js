@@ -507,7 +507,10 @@ console.log(fn(videoJSON))
 
 // SAMPLE OUTPUT
 // [{ "1" : ["Great tutorial!", "Thanks for the help!"] }, ...] 
+<<<<<<< Updated upstream
 // [{ "1" : ["Great tutorial!", "Thanks for the help!"] }, ...] 
+=======
+>>>>>>> Stashed changes
 
 
 
@@ -533,6 +536,7 @@ const secondLargest = (numbers) => {
 };
 
 const secondLargest2 = arrNums => arrNums.reduce((acc, cur) => cur > acc && cur != Math.max(...arrNums) ? cur : acc, 0);
+<<<<<<< Updated upstream
 // console.log(secondLargest(numbers6)); //10
 
 
@@ -582,3 +586,6 @@ const users = [
 
 const getUser = users => users.reduce((acc, curr) => acc.friends.length > curr.friends.length ? acc : curr).name;
 console.log(getUser(users)); // Charlie
+=======
+// console.log(secondLargest(numbers6)); //10
+>>>>>>> Stashed changes
