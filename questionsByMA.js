@@ -589,3 +589,32 @@ console.log(getUser(users)); // Charlie
 // =======
 // console.log(secondLargest(numbers6)); //10
 // >>>>>>> Stashed changes
+
+
+
+
+
+const numbers7 = [12, 46, 32, 64, 100, 120, 198];
+const numbers8 = [12, 46, 32, 100, 120, 198];
+// mean: sum of all values divided by the total number of values
+// median: A median is the centre value of a given list of observations when arranged in an order.
+// Find the mean and median of numbers
+//81.
+//84
+const getMean = numbers => numbers.reduce((sum, curr, i, arr) => sum + curr, 0) / numbers.length;
+// console.log(getMean(numbers1));
+// console.log(getMean(numbers2));
+
+
+const getMedian = numbers => numbers.sort((a, b) => a - b).reduce((acc, curr, i) => {
+  if (numbers.length - i >= numbers.length / 2) {
+    return acc = curr;
+  }
+  if (numbers.length % 2 === 0) {
+
+  }
+  return acc;
+}, 0);
+console.log(getMedian(numbers7))
+//64
+//73
