@@ -1,10 +1,11 @@
+// If we use .then() or await only when it'll go in microtask queue
+
+
 // async makes a function return a Promise
 // await makes a function wait for a Promise
 
 // If we return string in normal function it'll return string
-//  but if we return string in async function it'll return promise
-
-// if we use await , the result of promise will store in the variable
+//  but if we return string in async function it'll return promise and result will be that string.
 
 // While a Promise object is "pending" (working), the result is undefined.
 // When a Promise object is "fulfilled", the result is a value.
@@ -24,7 +25,7 @@ dd();
 console.log('c');
 /*
   first console.log("a") - will push in call stack and execute
-  - dd() is calling so, it will push in call stack and it'll go inside dd() funcion and it'll see 'const e= await a() ' and it'll call function a() and a will take some time so that function will wait there and dd will popped out then , the 'console.log('c')' will push in call stack and execute,
+  - dd() is calling so, it will push in call stack and it'll go inside dd() funcion and it'll see 'const e= await a() ' and it'll call function a() and a() will take some time so that function will wait there and dd will popped out then , the 'console.log('c')' will push in call stack and execute,
   
   now the a() funcion sent the response and we stored that in variable 'e' so the dd() function will start executing again from line no. 8 
   so at the end 'console.log('e', e)' will print 
@@ -37,7 +38,7 @@ console.log('c');
 
  //we write await there so the it will wait till a() function returns result so after returning the result the result will store in variable 'e'
  THE RESULT WILL STORE NOT PROMISE
- IF WE DO console.log(a()) IT WILL PRINT PROMISE , BUT WE USE AWAIT SO THE RESULT OF PROMISE WILL STORE.
+ IF WE DO console.log(a()) IT WILL PRINT PROMISE , BUT WE USE AWAIT SO THE RESULT OF PROMISE WILL STORE i.e 'b'.
  */
 // -------
 
