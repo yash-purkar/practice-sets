@@ -77,7 +77,7 @@ it will return where function was called.
 
 
 
-// 2️⃣3. Write an ES6 function that calculates and returns the total value of all items in an array of objects.
+// 2️⃣ Write an ES6 function that calculates and returns the total value of all items in an array of objects.
 //returning number
 const items = [
   { name: "Item 1", price: 10 },
@@ -114,4 +114,155 @@ it will return where function was called.
 */
 
 
-// returning an object.
+// returning object.
+// 3️⃣Write an ES6 function that takes an array of objects with name and age property, and returns the oldest person.
+
+const people = [
+  { name: 'Jeena', age: 25 },
+  { name: 'Priya', age: 30 },
+  { name: 'Naina', age: 45 },
+  { name: 'Priyanka', age: 35 }
+]
+// Your code here
+const oldestPersonName = people => people.reduce((acc, curr) => acc.age < curr.age ? curr : acc)
+
+console.log(oldestPersonName(people));
+// Output: { name: 'Naina', age: 45 }
+
+//Here we didn't give the initial value to acc,so it'll take the first element of the array which will be object it is ok, because we have to compare the age of the peoples for checking the oldest person amongst them.
+/*
+1st iteration
+acc = { name: 'Jeena', age: 25 }
+curr = { name: 'Priya', age: 30 }
+acc.age < curr.age => 25 < 30 True
+return curr => { name: 'Priya', age: 30 }
+
+
+2nd iteration
+return value from the last iteration which will be assigned to acc in next iteration
+{ name: 'Priya', age: 30 }
+acc = { name: 'Priya', age: 30 }
+curr = { name: 'Naina', age: 45 }
+acc.age < curr.age => 30 < 45 true
+return curr => { name: 'Naina', age: 45 }
+
+3rd iteration
+return value from the last iteration which will be assigned to acc in next iteration
+{ name: 'Naina', age: 45 }
+acc= { name: 'Naina', age: 45 }
+curr = { name: 'Priyanka', age: 35 }
+acc.age < curr.age => 45<35 False
+return acc => { name: 'Naina', age: 45 }
+
+now elements of the array is ended
+the last return the accumulator value (i.e { name: 'Naina', age: 45 }) will be return value of function,
+it will return where function was called.
+*/
+
+
+// returning object
+// 4️⃣ Write an ES6 function that takes an array of strings and returns an object with the count of each string.
+
+const fruits = ['apple', 'banana', 'banana', 'cherry', 'apple', 'apple', 'banana'];
+const countStrings = strings => strings.reduce((acc, curr) => curr in acc ? { ...acc, [curr]: acc[curr] += 1 } : { ...acc, [curr]: 1 }, {})
+
+console.log(countStrings(fruits));
+// Output: { 'apple': 3, 'banana': 3, 'cherry': 1 }
+
+// Here we initialized empty object to the accumulator because, we wanna return object
+
+/*
+1st iteration
+acc={}
+curr="apple"
+curr in acc (is apple property is present in the acc object) FALSE
+{apple:1}
+nothing was inside acc object so nothing spreaded only apple property added and value will be 1
+return {apple:1}
+
+2nd iteration
+return value from the last iteration  - {apple:1}
+acc={apple:1}
+curr="banana"
+banana in acc object => False
+return {...acc,[curr]:1} //whatever values are in acc spread that and add new key
+it'll look like
+return {apple:1,banana:1}
+
+3rd iteration
+return value from the last iteration - {apple:1,banana:1}
+acc = {apple:1,banana:1}
+curr="banana"
+banana in acc - TRUE
+return {...acc,[curr]:acc[curr+=1]}
+it'll look like
+return {apple:1,banana:1,banana:1+1}
+{apple:1,banana:2}
+
+and so on.....
+*/
+
+
+// returning array
+//5️⃣ Write an ES6 function that takes an array of objects containing car information (make, model, year) and returns an array with only the car model that were made after the year 2012.
+const cars = [
+  { make: "Toyota", model: "Corolla", year: 2010 },
+  { make: "Honda", model: "Civic", year: 2012 },
+  { make: "Toyota", model: "Camry", year: 2015 },
+  { make: "Ford", model: "Mustang", year: 2018 },
+];
+
+// Your code here
+const getCarModel = cars => cars.reduce((acc, curr) => curr.year > 2012 ? [...acc, curr.model] : acc, []);
+
+const carModels = getCarModel(cars);
+console.log(carModels);
+// Output: ["Camry", "Mustang"]
+
+//we take empty array as a initial value of accumulator, because at the end we want to return an array.
+
+//acc is an empty array so the current value will be the 1st element of an array.
+
+/*
+1st iteration
+acc = []
+curr = { make: "Toyota", model: "Corolla", year: 2010 }
+curr.year > 2012 => 2010 >2012 False
+return acc
+[]
+
+2nd iteration
+return value from previous iteration
+[]
+acc=[]
+curr =  { make: "Honda", model: "Civic", year: 2012 } 
+curr.year > 2012 => 2012 > 2012 False (bcz it is equal not greater)
+return acc
+[]
+
+3rd iteration
+return value from the previous iteration
+[]
+acc=[]
+curr = { make: "Toyota", model: "Camry", year: 2015 }
+curr.year > 2012 => 2015 > 2012 TRUE
+return [...acc,curr.model]
+=> [...acc,Camry] // whatever is in acc spread that elements and add new element in an array.
+but this time nothing in an array so nothing will be spreaded just it'll add "Camry"
+=> ["Camry"]
+
+
+4th iteration
+return value from the last iteration
+["Camry"]
+acc=["Camry"]
+curr = { make: "Ford", model: "Mustang", year: 2018 }
+curr.year > 2012 => 2018 > 2012 TRUE
+return [...acc,curr.model] // spread the elements of acc and add new in it
+["Camry","Mustang"]
+
+now elements of the array is ended
+the last return the accumulator value (i.e ["Camry","Mustang"]) will be return value of function,
+it will return where function was called.
+
+*/
