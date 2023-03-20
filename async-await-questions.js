@@ -103,3 +103,116 @@ c
 we didn't use await so directly promise is being stored in 'e' i.e Promise { 'b' }, if we use await the result will store directly i.e "b"
 we didn't use await so code will not stop anywhere it'll execute line by line.
 */
+
+
+
+// 4.
+const first = () =>
+  new Promise((resolve, reject) => {
+    console.log('a');
+    reject('b');
+    console.log('c');
+  })
+console.log('d');
+first().then((data) => {
+  console.log(data);
+}).catch(err => console.log(err));
+console.log('e')
+// OUTPUT =>  //d a c e b
+/*
+1st console.log("b") will push inside call stack and execute "b"
+then first() function is being called so it'll push inside call stack and, it'll go inside first() and console.log("a") will print "a",
+then reject("b") is calling so it'll push inside call stack and it'll see it is the part of webAPI so it'll go into the web API and remaining code will be executed i.e
+console.log("c") and it'll go console.log("e") now the reject's callback function will come inside micro task queue and event loop will check is callstack empty , now it is empty then it'll push that callback in to the callstack and callstack will execute that line by line.
+the "b" which we are passing in reject("b") it'll go in the catch as a error and catch() will be print that "b";
+*/
+
+
+// -------------------------------------------------
+// 5.
+const second = () => setTimeout(() => {
+  console.log('f')
+}, 2000)
+
+const first1 = () =>
+  new Promise((resolve, reject) => {
+    second()
+    console.log('a');
+    reject('b');
+    console.log('c');  // d a c e b f
+  })
+
+console.log('d');
+
+first1().then((data) => {
+  console.log(data);
+}).catch(err => console.log(err));
+console.log('e');
+// OUTPUT => d a c e b f
+/*1st console.log("b"); will execute
+ then first function is being called , so it'll go inside first() function,
+ and inside first there is a second() function is calling so it'll go inside second() and js engine will see there is a setTimeout so it'll send setTimeout's callback function to the web api and it'll also add the timer to it.
+ then counter will go to the next line, and console.log("a") will print.
+ then there is reject("b")
+ so it'll call a catch() function so it'll go inside webAPI and send that callback function of catch with response to micro task queue
+ but the call stack is not empty because the remaing code is still running i.e console.log("c") then console.log("e") after that
+ the callstack will empty then the event loop will check is the callstack empty now it is empty so it'll push that callback function of catch() into the callstack and it'll execute and console.log(err) => "b" will print
+ and the the 2seconds delay of setTimeout will expire and once it expires the callback function will come in the callback queue and callstack is empty so event loop will push that callback in to the callstack and it'll execute that callback function and it'll print console.log("f")
+*/
+
+
+// -------------------------------------------------
+// const second = () => setTimeout(()=>{
+//   console.log('f')
+// },2000)
+
+// const first = () =>
+// new Promise((resolve,reject)=> {
+//   second()
+//   console.log('a');
+// setTimeout(()=> {
+//   resolve('b');
+//   console.log('c');
+// },4000)
+// })
+// console.log('d');
+// first().then((data) => {
+// console.log(data);
+// }).catch(err=>console.log(err);
+// console.log('e')
+// const second = () => setTimeout(()=>{
+//   console.log('f')
+// },2000)
+
+// const first = () =>
+// new Promise((resolve,reject)=> {
+//   second()
+//   console.log('a');
+// setTimeout(()=> {
+
+//   console.log('c');
+// },1000);
+//   resolve('b');
+// })
+// console.log('d');
+// first().then((data) => {
+// console.log(data);
+// }).catch(err=>console.log(err);
+// console.log('e')
+// -------------------------------------------------
+// const second = () => setTimeout(()=>{
+//   console.log('f')
+// },2000)
+
+// const first = () =>
+// new Promise((resolve,reject)=> {
+//   second();
+//   resolve('a');
+//   reject('b');
+//   console.log('c');
+// })
+// console.log('d');
+// first().then((data) => {
+// console.log(data);
+// }).catch(err=>console.log(err));
+// console.log('e')

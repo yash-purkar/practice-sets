@@ -184,6 +184,12 @@ fakeFetch4("https://example.com/api/itemlist").then((response) => {
   showList.innerHTML = response.data.map(({ itemName, price, quantity }) => `<li>${itemName} -- INR ${price} -- ${quantity}</li>`)
 })
 
+/*<ol>
+      ${response.data.map(
+        (item) =>
+          `<li>${item.itemName} -- INR ${item.price} -- ${item.quantity}</li>`
+      ).join('')}
+      </ol>*/
 
 /*fakeFetch4("https://example.com/api/itemlist").then((response) => {
   response.data.map(({ itemName, price, quantity }) => showList.innerHTML += `<li>${itemName} -- INR ${price} -- ${quantity}</li>`)
