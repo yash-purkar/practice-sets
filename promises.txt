@@ -1,5 +1,7 @@
 // 🔸callback hell
-// Every callback depends/waits for the previous callback,
+// Every callback depends/waits for the previous callback
+
+
 console.log("Start")
 
 function loginUser(email, pass, callback) {
@@ -23,8 +25,8 @@ console.log("End");
 
 
 
-// 🔸Promises
-console.log("start")
+🔸Promises
+/*console.log("start")
 
 const loginUser = (email, pass) => {
   return new Promise((resolve, reject) => {
