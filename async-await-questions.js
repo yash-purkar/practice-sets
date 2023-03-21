@@ -104,7 +104,7 @@ we didn't use await so directly promise is being stored in 'e' i.e Promise { 'b'
 we didn't use await so code will not stop anywhere it'll execute line by line.
 */
 
-
+// ********************************
 
 // 4.
 const first = () =>
@@ -117,14 +117,17 @@ console.log('d');
 first().then((data) => {
   console.log(data);
 }).catch(err => console.log(err));
-console.log('e')
+console.log('e');
 // OUTPUT =>  //d a c e b
 /*
-1st console.log("b") will push inside call stack and execute "b"
-then first() function is being called so it'll push inside call stack and, it'll go inside first() and console.log("a") will print "a",
-then reject("b") is calling so it'll push inside call stack and it'll see it is the part of webAPI so it'll go into the web API and remaining code will be executed i.e
-console.log("c") and it'll go console.log("e") now the reject's callback function will come inside micro task queue and event loop will check is callstack empty , now it is empty then it'll push that callback in to the callstack and callstack will execute that line by line.
-the "b" which we are passing in reject("b") it'll go in the catch as a error and catch() will be print that "b";
+1st console.log("d") will be pushed inside callstack and it'll execute and then popped out from stack.
+now first is calling so at that time the first will push inside callstack and also .then's callback function and .catch's callback function will go into the webAPI's and wait for get activated.
+in the callstack there is a first() function
+above that console.log("a") will push and it'll execute and then popped out
+then there is a reject("b") so it'll trigger the callback function of catch() and it'll come inside micro task queue event loop will check is whether the callstack is empty or not but now callstack is not empty 
+the console.log("c") is being executed so after executing this line the first() will pop out from the callstack and there is a console.log("e") also so this line will also push inside callstack and execute and after executing that the callstack will be empty and the callback function of catch will be pushed inside callstack and it'll execute line by line so console.log(err) will be printed i.e "b"
+
+   //d a c e b
 */
 
 
@@ -139,26 +142,33 @@ const first1 = () =>
     second()
     console.log('a');
     reject('b');
-    console.log('c');  // d a c e b f
+    console.log('c'); //d a c e b f
   })
 
 console.log('d');
 
 first1().then((data) => {
   console.log(data);
-}).catch(err => console.log(err));
+}).catch((err) => console.log(err));
 console.log('e');
 // OUTPUT => d a c e b f
-/*1st console.log("b"); will execute
- then first function is being called , so it'll go inside first() function,
- and inside first there is a second() function is calling so it'll go inside second() and js engine will see there is a setTimeout so it'll send setTimeout's callback function to the web api and it'll also add the timer to it.
- then counter will go to the next line, and console.log("a") will print.
- then there is reject("b")
- so it'll call a catch() function so it'll go inside webAPI and send that callback function of catch with response to micro task queue
- but the call stack is not empty because the remaing code is still running i.e console.log("c") then console.log("e") after that
- the callstack will empty then the event loop will check is the callstack empty now it is empty so it'll push that callback function of catch() into the callstack and it'll execute and console.log(err) => "b" will print
- and the the 2seconds delay of setTimeout will expire and once it expires the callback function will come in the callback queue and callstack is empty so event loop will push that callback in to the callstack and it'll execute that callback function and it'll print console.log("f")
+/*
+1st console.log("d") will push inside callstack and after executing it'll pop out from the stack.
+then there is a first1() function is calling so it'll push inside callstack and at that time the callback function of "then" and callback function of "catch" will go into the web API and they will wait to be executed.
+now it'll go inside first1() funcion
+there is a another function call so second() will push into the callstack above first() so js will see there is setTimeout so it'll send the callback function of setTimeout to the webAPI and it'll also attach the timer of 2000 ms, and second will be popped out from the stack.
+then console.log("a") will be pushed and execute and after executing it'll popped out.
+then there is a reject("b") so it'll trigger the callback function of catch and that callback function will be pushed inside microtask queue.
+// the 2000ms timer is still running
+event loop will check is callstack empty but it is not because GEC is not popped out,
+the console.log("c") will push inside callstack and it'll execute and after that the first1() function will pop out from the callstack.
+then the console.log("e") will pushed inside callstack and execute and it'll pop out.
+now the GEC program execution is done so callstack will be empty now.
+so event loop will check is the callstack empty , now it is empty so it'll push that callback funcion of catch in side callstack and callstack will execute it line by line.
+so console.log(err) i.e "b" will be printed and after executing the callback function will be popped out from the callstack and callstack will empty.
+now the 2000ms is expired and the callback function of setTimeout will come inside callback queue and event loop will check is callstack empty now it is empty so it'll push that callback function inside callstack and callstack will execute it line by line i.e "f" so after executing it'll also popped out.
 */
+
 
 
 // -------------------------------------------------
