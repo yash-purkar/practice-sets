@@ -23,10 +23,10 @@ const user = loginUser("abcd@gmail.com", 12345, (response) => {
 
 console.log("End");
 
+//*********************************************************************** */
 
 
-🔸Promises
-/*console.log("start")
+
 
 const loginUser = (email, pass) => {
   return new Promise((resolve, reject) => {
@@ -43,6 +43,10 @@ const getVideos = email => {
     }, 2000)
   })
 }
+
+// 🔸Promises
+
+console.log("start")
 
 loginUser("abcd@gmail.com", 12345).then(data => getVideos(data.userEmail)).then(videos => console.log("vid", videos))
 
@@ -51,32 +55,15 @@ console.log("End")
 
 
 // 🔸 Async - Await
-const loginUser = (email, pass) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({ userEmail: email })
-    }, 2000)
-  })
-}
-
-const getVideos = email => {
-
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(["video1", "video2", "video3"])
-    }, 2000)
-  })
-}
-
 
 const displayUser = async () => {
 
   const loggedInUser = await loginUser("abcd@gmail.com", 124);
-  console.log(loggedInUser)
+  // console.log(loggedInUser)
   const videos = await getVideos(loggedInUser.userEmail);
   console.log(videos)
 
 }
 console.log("Start")
 displayUser()
-console.log("End")
+console.log("End");
