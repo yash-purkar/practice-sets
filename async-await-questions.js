@@ -107,21 +107,21 @@ we didn't use await so code will not stop anywhere it'll execute line by line.
 // ********************************
 
 // 4.
-const first = () =>
+const first2 = () =>
   new Promise((resolve, reject) => {
     console.log('a');
     reject('b');
     console.log('c');
   })
 console.log('d');
-first().then((data) => {
+first2().then((data) => {
   console.log(data);
 }).catch(err => console.log(err));
 console.log('e');
 // OUTPUT =>  //d a c e b
 /*
 1st console.log("d") will be pushed inside callstack and it'll execute and then popped out from stack.
-now first is calling so at that time the first will push inside callstack and also .then's callback function and .catch's callback function will go into the webAPI's and wait for get activated.
+now first is calling so at that time the first will push inside callstack.
 in the callstack there is a first() function
 above that console.log("a") will push and it'll execute and then popped out
 then there is a reject("b") so it'll trigger the callback function of catch() and it'll come inside micro task queue event loop will check is whether the callstack is empty or not but now callstack is not empty 
@@ -133,13 +133,13 @@ the console.log("c") is being executed so after executing this line the first() 
 
 // -------------------------------------------------
 // 5.
-const second = () => setTimeout(() => {
+const second1 = () => setTimeout(() => {
   console.log('f')
 }, 2000)
 
 const first1 = () =>
   new Promise((resolve, reject) => {
-    second()
+    second1()
     console.log('a');
     reject('b');
     console.log('c'); //d a c e b f
@@ -154,7 +154,7 @@ console.log('e');
 // OUTPUT => d a c e b f
 /*
 1st console.log("d") will push inside callstack and after executing it'll pop out from the stack.
-then there is a first1() function is calling so it'll push inside callstack and at that time the callback function of "then" and callback function of "catch" will go into the web API and they will wait to be executed.
+then there is a first1() function is calling so it'll push inside callstack.
 now it'll go inside first1() funcion
 there is a another function call so second() will push into the callstack above first() so js will see there is setTimeout so it'll send the callback function of setTimeout to the webAPI and it'll also attach the timer of 2000 ms, and second will be popped out from the stack.
 then console.log("a") will be pushed and execute and after executing it'll popped out.
@@ -172,57 +172,428 @@ now the 2000ms is expired and the callback function of setTimeout will come insi
 
 
 // -------------------------------------------------
-// const second = () => setTimeout(()=>{
-//   console.log('f')
-// },2000)
+/*const second = () => setTimeout(() => {
+  console.log('f')
+}, 2000)
 
-// const first = () =>
-// new Promise((resolve,reject)=> {
-//   second()
-//   console.log('a');
-// setTimeout(()=> {
-//   resolve('b');
-//   console.log('c');
-// },4000)
-// })
-// console.log('d');
-// first().then((data) => {
-// console.log(data);
-// }).catch(err=>console.log(err);
-// console.log('e')
-// const second = () => setTimeout(()=>{
-//   console.log('f')
-// },2000)
+const first = () =>
+  new Promise((resolve, reject) => {
+    second()
+    console.log('a');
+    setTimeout(() => {
+      resolve('b');
+      console.log('c');
+    }, 4000)
+  })
+console.log('d');
+first().then((data) => {
+  console.log(data);
+}).catch(err => console.log(err));
+console.log('e')*/
 
-// const first = () =>
-// new Promise((resolve,reject)=> {
-//   second()
-//   console.log('a');
-// setTimeout(()=> {
+/*
+d
+a
+e
+f
+c
+b
+*/
 
-//   console.log('c');
-// },1000);
-//   resolve('b');
-// })
-// console.log('d');
-// first().then((data) => {
-// console.log(data);
-// }).catch(err=>console.log(err);
-// console.log('e')
+//************************************************************ */
+
+
+
+/*const second = () => setTimeout(() => {
+  console.log('f')
+}, 2000)
+
+const first = () =>
+  new Promise((resolve, reject) => {
+    second()
+    console.log('a');
+    setTimeout(() => {
+
+      console.log('c');
+    }, 1000);
+    resolve('b');
+  })
+console.log('d');
+first().then((data) => {
+  console.log(data);
+}).catch(err => console.log(err));
+console.log('e')*/
+/*
+d
+a
+e
+b
+c
+f
+*/
+
+
+
+
 // -------------------------------------------------
-// const second = () => setTimeout(()=>{
-//   console.log('f')
-// },2000)
 
-// const first = () =>
-// new Promise((resolve,reject)=> {
-//   second();
-//   resolve('a');
-//   reject('b');
-//   console.log('c');
-// })
-// console.log('d');
-// first().then((data) => {
-// console.log(data);
-// }).catch(err=>console.log(err));
-// console.log('e')
+/*const second = () => setTimeout(() => {
+  console.log('f')
+}, 2000)
+
+const first = () =>
+  new Promise((resolve, reject) => {
+    second();
+    resolve('a');
+    reject('b');
+    console.log('c');
+  })
+console.log('d');
+first().then((data) => {
+  console.log(data);
+}).catch(err => console.log(err));
+console.log('e')*/
+/*
+d
+c
+e
+a
+f
+*/
+
+
+//*************************************************** */
+
+
+/*const second = () => setTimeout(() => {
+  console.log('f')
+}, 2000)
+
+const first = () =>
+  new Promise((resolve, reject) => {
+    second()
+    console.log('a');
+    setTimeout(() => {
+      console.log('c');
+    }, 1000);
+    resolve('b');
+  })
+
+console.log('d');
+
+first().then((data) => {
+  console.log(data);
+}).catch(err => console.log(err));
+console.log('e')*/
+
+/*
+d
+a
+e
+b
+c
+f
+*/
+
+
+// // // -------------------------------------------------
+
+
+//  5.
+/*const second = () => setTimeout(() => {
+  console.log('f')
+}, 2000)
+
+const first = () =>
+  new Promise((resolve, reject) => {
+    second();
+    resolve('a');
+    reject('b');
+    console.log('c');
+  })
+console.log('d');
+first().then((data) => {
+  console.log(data);
+}).catch(err => console.log(err));
+console.log('e')*/
+
+/*
+d
+c
+e
+a
+f
+ */
+//  --------------------
+
+
+
+// // 6.
+/*
+const second = () => setTimeout(() => {
+  console.log('f')
+}, 2000)
+
+const first = () =>
+  new Promise((resolve, reject) => {
+    second()
+    console.log('a');
+    setTimeout(() => {
+      console.log('c');
+    }, 0);
+    resolve('b');
+  })
+console.log('d');
+first().then((data) => {
+  console.log(data);
+}).catch(err => console.log(err));
+console.log('e')
+*/
+/*
+d
+a
+e
+b
+c
+f
+ */
+
+
+// // -------------------------------------------------
+//  7.
+/*const second = () => setTimeout(() => {
+  console.log('f')
+}, 2000)
+
+const first = () =>
+  new Promise((resolve, reject) => {
+    second()
+    console.log('a');
+    setTimeout(() => {
+      console.log('c');
+    }, 0);
+    reject('b');
+  })
+
+console.log('d');
+
+first().then(console.log('g')).catch(err => console.log(err));
+console.log('e')*/
+
+/*
+d
+a
+g
+e
+b
+c
+f
+ */
+// // -----------------
+
+
+// // 8.
+/*const second = async () => {
+  setTimeout(() => {
+    console.log('f')
+  }, 0)
+  console.log('g');
+  return 'h';
+}
+const first = () =>
+  new Promise((resolve, reject) => {
+    second()
+    console.log('a');
+    setTimeout(() => {
+      console.log('c');
+    }, 0);
+    resolve('b');
+  })
+console.log('d');
+console.log(first());
+console.log('e');
+ */
+
+/*
+d
+g
+a
+Promise {<fulfilled>: 'b'}
+e
+f
+c
+*/
+
+//***************************************** */
+
+//
+/*
+const second = async () => {
+  setTimeout(() => {
+    console.log('f')
+  }, 0)
+  console.log('g');
+  return 'h';
+}
+const first = () =>
+  new Promise((resolve, reject) => {
+    second()
+    console.log('a');
+    setTimeout(() => {
+      console.log('c');
+    }, 0);
+    resolve('b');
+  })
+console.log('d');
+console.log(first().then(data => console.log(data)));
+console.log('e');
+
+*/
+/*
+d
+g
+a
+Promise {<pending>}
+e
+b
+f
+c
+*/
+
+
+
+// // -------------------------------------------------
+
+// // 9.
+
+/*const first = () =>
+  new Promise((resolve, reject) => {
+    console.log('a');
+    resolve('b');
+  })
+const a = () => console.log('g');
+first().then(a).catch(err => console.log(err));
+console.log('e')*/
+
+// .then(a) it is like .then(() => console.log('g'));
+/*
+a
+e
+g
+*/
+
+// // -------------------------------------------------
+// 10.
+/*const second = async () => {
+  setTimeout(() => {
+    console.log('f')
+  }, 0)
+  console.log('g');
+  return 'h';
+}
+const first = () =>
+  new Promise(async (resolve, reject) => {
+    const value = await second() //h
+    console.log('a', value);
+    setTimeout(() => {
+      console.log('c');
+    }, 0);
+    resolve('b');
+  })
+console.log('d');
+console.log(first().then((data) => console.log(data)));
+console.log('e');
+*/
+
+/*
+d
+g
+promise <pending>
+e
+a h
+b
+f
+c */
+// // -----------------
+
+
+
+// 11. 
+
+/*const second = async () => {
+  setTimeout(() => {
+    console.log('f')
+  }, 0)
+  console.log('g');
+  return 'h';
+}
+
+const first = () =>
+  new Promise(async (resolve, reject) => {
+    const value = second()
+    console.log('a', value);
+    setTimeout(() => {
+      console.log('c');
+    }, 0);
+    resolve('b');
+  })
+console.log('d');
+console.log(first().then((data) => console.log(data)));
+console.log('e');*/
+
+/*d
+g
+a Promise { 'h' }
+Promise { <pending> }
+e
+b
+f
+c*/
+
+
+// -------------------------------------------------
+
+
+// 12. 
+
+const second = async () => {
+  setTimeout(() => {
+    console.log('f')
+  }, 0)
+  console.log('g');
+  return 'h';
+}
+
+const first = () =>
+  new Promise(async (resolve, reject) => {
+    const value = second()
+    console.log('a', value);
+    setTimeout(() => {
+      console.log('c');
+      resolve('b');
+    }, 0);
+    setTimeout(() => {
+      console.log('i');
+      reject('j');
+    }, 0);
+    const latestValue = await value;
+    console.log(latestValue)
+  })
+console.log('d');
+console.log(first().then((data) => console.log(data)));
+console.log('e');
+
+/*
+d
+g
+a Promise { 'h' }
+Promise { <pending> }
+e
+h
+f
+c
+b
+i
+*/
+
+
