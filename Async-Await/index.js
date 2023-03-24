@@ -303,5 +303,51 @@ fakeFetch7("https://example.com/api/profile/NC002")
 
 
 
-
 // Output on the DOM should be: Welcome!, Roshan from neoG Camp
+
+
+
+
+// 1️⃣2️⃣ 
+
+/*
+const app = document.querySelector("#app");
+
+const getUser = async (id) => {
+  const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+  const data = await response.json();
+  console.log(data);
+  app.innerText = `${data.name} (${data.email})`
+};
+
+getUser(5);
+
+//Chelsey Dietrich (Lucio_Hettinger@annie.ca)
+*/
+const app = document.querySelector("#app");
+
+const getUser = async (url) => {
+  const response = await fetch(url);
+  const data = await response.json();
+  console.log(data);
+  app.innerHTML = `<ol>
+  ${data.map((user) => `<li>${user.name} (${user.email})</li>`)}
+  </ol>`;
+};
+getUser(`https://jsonplaceholder.typicode.com/users`);
+
+/*
+// a retun 'b'
+const value = a() 
+//promise {b}
+
+// a retun 'b'
+const value = await a()
+//b
+
+const data = response.json()
+// promise{resp}
+
+const data = await response.json()
+// resp
+*/
