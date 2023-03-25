@@ -56,18 +56,49 @@ const joinedArr = strArr.join("/");
 // syntax=> slice(start,end)
 const a = ["John", "Doe", "Tom", "Jerry", "Jack"];
 const b = a.slice(1, 3) //uptp n-1
-console.log(b) //[ 'Doe', 'Tom' ] // b will be a new array.
+// console.log(b) //[ 'Doe', 'Tom' ] // b will be a new array.
 
 //If we give only one value in slice it'll start from their and will go up to the end of an array.
 const c = a.slice(2);
-console.log(c)//[ 'Tom', 'Jerry', 'Jack' ]
+// console.log(c)//[ 'Tom', 'Jerry', 'Jack' ]
 
 //Their is a also -values
 // -1 is the last element of an array and it decreases up to 0th index
 //In our e.g -1 is the Jack and -5 is the John 
 const d = a.slice(-2)
-console.log(d) //[ 'Jerry', 'Jack' ]
+// console.log(d) //[ 'Jerry', 'Jack' ]
 // from -2 to upto end.
 
 const e = a.slice(-3, -1) //upto n-1
-console.log(e)// ['Tom','Jerry']
+// console.log(e)// ['Tom','Jerry']
+
+
+// 🔸splice()
+// If we want to add value in between of an array.
+// If we want to delete values in an array
+// It doesn't create a new array.
+
+// syntax
+// splice(index, how many delete, new values)
+
+const arr1 = ["Ahsan", "Chirag", "Prajwal"]
+arr1.splice(2, 0, "Aman", "Yash");
+// console.log(arr1);//[ 'Ahsan', 'Chirag', 'Aman', 'Yash', 'Prajwal' ]
+//here we added from 2nd index and any item shoudn't deleted so 0.
+// So from 2nd index new values will be added.
+
+const arrr = ['Ahsan', 'Chirag', 'Aman', 'Yash', 'Prajwal'];
+arrr.splice(2, 1, "Umesh", "Sankesh");
+// console.log(arrr);// ['Ahsan','Chirag','Umesh','Sankesh','Yash','Prajwal'];
+// It'll add the values from index 2.
+//We give deleted should be 1 so from the index 2 the next 1 element will be deleted that is 'Aman', and if we give deleted Items 2 then the next 2 items from index 2 will be deleted, i.e 'Aman' and 'Yash';
+// We can also give - indexes like slice method
+
+//If we want to only delete the items
+const arrrr = ['Ahsan', 'Chirag', 'Umesh', 'Sankesh', 'Yash', 'Prajwal'];
+arrrr.splice(2, 2);
+//from 2th index next 2 items will be deleted.
+console.log(arrrr);//['Ahsan','Chirag','Yash','Prajwal']
+
+
+
