@@ -15,6 +15,7 @@
 // 1. 
 console.log('a')
 async function a() {
+  console.log("fun a")
   return 'b';
 }
 async function dd() {
