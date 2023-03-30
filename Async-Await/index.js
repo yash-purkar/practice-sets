@@ -478,7 +478,7 @@ const fakeFetch2 = (url) => {
 /*fakeFetch2("https://example.com/winner-team")
   .then(({ status, data: { data } }) => {
     console.log("hi")
-    if (status === 200) outputBox.innerHTML = `Congratulation to the members of winning team ${${data.map(name => `${name}, `).join("")} great work keep it up.`
+    if (status === 200) outputBox.innerHTML = `Congratulation to the members of winning team ${data.map(name => `${name}, `).join("")} great work keep it up.`
   }).catch(({ status, message }) => outputBox.innerText = `${status} ${message}`)*/
 
 //async await
